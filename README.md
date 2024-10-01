@@ -1,66 +1,53 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+<h1>Introduction</h1>
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+<h2>Guest Side</h2>
 
-## About Laravel
+<p>This is a basic reservation system where a guest can select a check-in date, check-out date, and number of guests. This then goes to the available rooms page where we display the rooms that are available (not booked yet) and suitable for the amount of guests. This is very basic and shows the amount for the room per night and then a total according to the number of nights chosen. The guest selects the room they want to book and then gets redirected to the guest information form. Here the guest fills in their details that are all required. They have an option to confirm the reservation and go to the payments page, or they can cancel the reservation. If they cancel, they get redirected back to the home page and a message is shown. If they confirm the reservation, they will go to the payment page. On the payment page, we have fake credit card details in place so for demo you can just click pay now. Once "Pay Now" has been selected, a reservation confirmation page is shown with all the details and a randomly generated reference number. You have the option to print the page where we hide the buttons to not show on the printed page. The system will also fire a confirmation email to the guest with the booking details. Other than this, you can click the button to go back to the home page.</p>
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+<h2>Admin Side</h2>
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+<p>As an admin user, you can click on the avatar button in the top navigation then click login. This will take you to the login page. Here you can fill in the user details to log in. The demo user that has been seeded is: admin@test.com with password <code>4dm1n123!!</code>.</p>
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+<p>On the dashboard, bookings that are upcoming in the next 7 days are shown. It shows a summary of the total bookings, total rooms booked, and the total number of guests. It also shows cards for each booking.</p>
 
-## Learning Laravel
+<p>In the top navigation, there is a home button — takes you back to the dashboard landing page, a reservations option to show more details about the reservations, and a power button to log out.</p>
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+<p>The reservations page shows by default the booked reservations. There is a search filter to search on reference number, guest name, and room type. There is also a filter button to select between the reservation statuses of All, Booked, Pending, Checked in, Canceled, and Done.</p>
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+<h2>Status Explanation:</h2>
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+<ul>
+<li><strong>All</strong>: Self-explanatory</li>
+<li><strong>Booked</strong>: Guests who have booked a reservation and fully paid.</li>
+<li><strong>Pending</strong>: Guests who have booked but payment has not yet been made.</li>
+<li><strong>Checked in</strong>: An admin has the option to change the booked status to "checked in." This option is only available if today’s date is equal to the check-in date of the reservation.</li>
+<li><strong>Canceled</strong>: When a guest has canceled on the payment page, the booking is marked as canceled.</li>
+<li><strong>Done</strong>: An admin has the option to mark a reservation as done. This is only available if today’s date is equal to the check-out date.</li>
+</ul>
 
-## Laravel Sponsors
+<h2>The Architecture Chosen</h2>
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+<p>For this project, I did a video tutorial series to familiarize myself with Vue and Inertia. My day-to-day experience is more with Alpine and Livewire, so I chose the VILT stack. I had before this done a few small Vue home projects and helped a friend with a Vue app. Tailwind I’m very familiar with. My database I used is MySQL, but the system should work with most databases. For the email sending I use Laravel Queues.</p>
 
-### Premium Partners
+<p>I had to google a lot but managed to get something working in the end. This is the 4th version or start of this project. I messed up the previous Laravel installs too much.</p>
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[WebReinvent](https://webreinvent.com/)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Jump24](https://jump24.co.uk)**
-- **[Redberry](https://redberry.international/laravel/)**
-- **[Active Logic](https://activelogic.com)**
-- **[byte5](https://byte5.de)**
-- **[OP.GG](https://op.gg)**
+<h2>Installation</h2>
 
-## Contributing
+<p>You will be able to access the repository at https://github.com/julura13/reservation. Here you can pull or download the zip file. I will also include a zip file in my email.</p>
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+<p>Unzip the folder and go into the folder. Here you have to run <code>composer install</code> and <code>npm install</code>. Most of the time, you will also need to run <code>php artisan generate:key</code>. You can copy the <code>.env.example</code> and rename it to <code>.env</code>, where some basic settings are pre-populated.</p>
 
-## Code of Conduct
+<p>Now you have to create a database locally. I have used MySQL, but this should work with most DB setups. I did create factories and a few seeders to set up reservations. Just run <code>php artisan migrate --seed</code> if you haven't already migrated, or <code>php artisan migrate:fresh --seed</code> if you did.</p>
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+<p>The system uses queues to send the guest emails, so remember to check the queue connection is set to the database. Once that is done, run the queues by doing <code>php artisan queue:work</code>.</p>
 
-## Security Vulnerabilities
+<p>To initialize the npm assets, run <code>npm run build &amp;&amp; npm run dev</code>. I’m using Valet on my machine, but this should give a URL in the terminal to run the project.</p>
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+<h3>Demo Admin User Details</h3>
 
-## License
+<ul>
+<li>Email: admin@test.com</li>
+<li>Password: <code>4dm1n123!!</code></li>
+</ul>
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+<p>The online version is also available at: <a href="https://reservations.julura.site">reservations.julura.site</a>.</p>
