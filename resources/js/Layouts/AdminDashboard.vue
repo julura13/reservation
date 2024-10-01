@@ -24,7 +24,7 @@
         </nav>
 
         <!-- Main Content -->
-        <main class="flex-1 bg-gray-100 p-6">
+        <main class="flex-1 bg-gray-100 md:py-12 md:px-24 p-6">
             <slot></slot> <!-- This is where the page content will be displayed -->
         </main>
     </div>
