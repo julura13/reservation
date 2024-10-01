@@ -28,7 +28,7 @@
         <div class="absolute top-0 left-0 w-screen" id="toastBanner">
             <div class="flex justify-between bg-orange-500">
                 <p class="flex bg-orange-500 justify-center text-white h-8 items-center font-bold w-full">{{ Session::get('message') }}</p>
-                <button class="w-8 text-white mr-12 font-bold hover:cursor-pointer hover:text-teal-200" id="closeBtn">x</button>
+                <button class="w-8 text-white md:mr-12 mr-2 font-bold hover:cursor-pointer hover:text-teal-200" id="closeBtn" onclick="closeToast()">x</button>
             </div>
 
         </div>
@@ -39,8 +39,10 @@
     </body>
 
 <script>
-    document.getElementById('closeBtn').addEventListener('click', function (){
+
+    function closeToast() {
         document.getElementById('toastBanner').classList.add('hidden');
-    });
+    }
+
 </script>
 </html>
