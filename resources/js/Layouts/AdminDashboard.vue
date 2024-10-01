@@ -25,14 +25,14 @@
 
         <!-- Main Content -->
         <main class="flex-1 bg-gray-100 md:py-12 md:px-24 p-6">
-            <slot></slot> <!-- This is where the page content will be displayed -->
+            <slot></slot>
         </main>
     </div>
 </template>
 
 <script>
 import { Link } from '@inertiajs/inertia-vue3';
-import { Inertia } from '@inertiajs/inertia'; // Correct import for Inertia's post method
+import { Inertia } from '@inertiajs/inertia';
 
 export default {
     components: {
@@ -40,7 +40,7 @@ export default {
     },
     methods: {
         logout() {
-            Inertia.post('/logout'); // Correct logout method using Inertia
+            Inertia.post('/logout');
         }
     }
 };

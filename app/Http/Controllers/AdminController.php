@@ -55,18 +55,6 @@ class AdminController extends Controller
         ]);
     }
 
-    public function upcomingReservations()
-    {
-        $today = Carbon::today();
-        $nextWeek = Carbon::today()->addDays(7);
-
-        $upcomingReservations = Reservation::whereBetween('start_date', [$today, $nextWeek])
-            ->with('guest', 'room')
-            ->get();
-
-        return inertia('Admin/UpcomingReservations', ['reservations' => $upcomingReservations]);
-    }
-
     public function markAsDone($reservationId)
     {
         $reservation = Reservation::findOrFail($reservationId);

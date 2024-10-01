@@ -1,6 +1,5 @@
 <template>
     <AdminDashboard>
-        <!-- Reservations Heading -->
         <h1 class="text-2xl font-bold mb-6">Manage Reservations</h1>
 
         <!-- Search and Filter Section -->
@@ -16,9 +15,9 @@
                 <option value="">All</option>
                 <option value="booked">Booked</option>
                 <option value="pending">Pending</option>
-                <option value="checked_in">Checked In</option> <!-- New status -->
+                <option value="checked_in">Checked In</option>
                 <option value="canceled">Canceled</option>
-                <option value="done">Done</option> <!-- Filter for done past reservations -->
+                <option value="done">Done</option>
             </select>
         </div>
 
@@ -47,13 +46,13 @@
             <td class="px-4 py-2 border">{{ showDaysTillArrival(reservation) }}</td>
             <td class="px-4 py-2 border">{{ capitalizeStatus(reservation.status) }}</td>
             <td class="px-4 py-2 border">
-              <!-- Mark as Done and Checked In buttons -->
+              <!-- Mark as Done button only when today === checkout_date -->
               <button v-if="isLastDay(reservation.end_date) && reservation.status !== 'done'"
                       @click="markAsDone(reservation.id)"
                       class="bg-orange-600 text-white px-4 py-1 rounded hover:bg-blue-700">
                 Mark as Done
               </button>
-
+              <!-- Mark as Checked in button only when today === check_in date -->
               <button v-if="isCheckInDay(reservation.start_date) && reservation.status !== 'checked_in'"
                       @click="markAsCheckedIn(reservation.id)"
                       class="bg-green-600 text-white px-4 py-1 rounded hover:bg-green-700">
@@ -74,28 +73,28 @@
 </template>
 
 <script>
-import AdminDashboard from '../../Layouts/AdminDashboard.vue'; // Correct path for AdminDashboard
-import { differenceInCalendarDays, format, parseISO } from 'date-fns'; // Import date-fns for date manipulation
-import axios from 'axios'; // For making requests to mark reservation as done or checked in
+import AdminDashboard from '../../Layouts/AdminDashboard.vue';
+import { differenceInCalendarDays, format, parseISO } from 'date-fns';
+import axios from 'axios';
 
 export default {
     props: {
         reservations: {
             type: Array,
-            default: () => []  // Ensures a default value of an empty array
+            default: () => []
         }
     },
     data() {
         return {
-            search: '', // The search term input
-            selectedStatus: 'booked', // Default to "completed"
-            filteredReservations: [] // Store filtered reservations
+            search: '',
+            selectedStatus: 'booked', // Default to "booked"
+            filteredReservations: []
         };
     },
     watch: {
         reservations: {
             handler() {
-                this.applyFilters(); // Apply filters whenever reservations change
+                this.applyFilters();
             },
             immediate: true
         }
@@ -120,7 +119,7 @@ export default {
         },
         showDaysTillArrival(reservation) {
             if (reservation.status !== 'booked') {
-                return ''; // Blank if the status is not "completed"
+                return ''; // Blank if the status is not "booked"
             }
 
             const checkInDate = parseISO(reservation.start_date);
@@ -164,11 +163,11 @@ export default {
                 });
         },
         capitalizeStatus(status) {
-            return status.charAt(0).toUpperCase() + status.slice(1); // Capitalize the first letter of the status
+            return status.charAt(0).toUpperCase() + status.slice(1);
         }
     },
     components: {
-        AdminDashboard  // Import the AdminDashboard component
+        AdminDashboard
     }
 };
 </script>

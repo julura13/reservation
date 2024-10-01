@@ -122,7 +122,7 @@ export default {
         },
         // Opens the date picker when the input is clicked
         openCalendar(event) {
-            event.target.showPicker(); // Programmatically open the date picker
+            event.target.showPicker();
         }
     }
 };

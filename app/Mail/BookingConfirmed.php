@@ -12,8 +12,8 @@ class BookingConfirmed extends Mailable
 {
     use Queueable, SerializesModels;
 
-    public $reservation;
-    public $guest;
+    public Reservation $reservation;
+    public Guest $guest;
 
     /**
      * Create a new message instance.
@@ -21,7 +21,7 @@ class BookingConfirmed extends Mailable
      * @param Reservation $reservation
      * @param Guest $guest
      */
-    public function __construct(    Reservation $reservation, Guest $guest)
+    public function __construct(Reservation $reservation, Guest $guest)
     {
         $this->reservation = $reservation;
         $this->guest = $guest;

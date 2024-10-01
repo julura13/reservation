@@ -2,7 +2,7 @@
     <nav class="bg-teal-600 p-4">
         <div class="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8">
             <div class="relative flex items-center justify-between h-16">
-                <!-- Logo as a clickable link -->
+                <!-- Logo as a link back to home page -->
                 <div class="flex items-center">
                     <a href="/" class="text-white text-xl font-bold hover:text-gray-300 transition-colors">
                         Reservation System
@@ -15,7 +15,6 @@
                         @click="toggleDropdown"
                         class="flex text-sm border-2 border-transparent rounded-full focus:outline-none focus:border-white"
                     >
-                        <!-- Use FontAwesome Icon for Avatar, updated size -->
                         <font-awesome-icon icon="user" class="text-white h-4 w-4" />
                     </button>
 
