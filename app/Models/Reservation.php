@@ -4,26 +4,38 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Reservation extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['guest_id', 'start_date', 'end_date', 'number_of_rooms'];
+    protected $fillable = [
+        'guest_id',
+        'room_id',
+        'start_date',
+        'end_date',
+        'number_of_rooms',
+        'status',
+        'reference_number'
+    ];
+
+    protected $table = 'reservations';
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     * @return BelongsTo
      */
-    public function guest(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+    public function guest(): BelongsTo
     {
         return $this->belongsTo(Guest::class);
     }
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     * @return BelongsTo
      */
-    public function room(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
+    public function room(): BelongsTo
     {
-        return $this->belongsToMany(Room::class);
+        return $this->belongsTo(Room::class, 'room_id', 'id');
     }
 }
