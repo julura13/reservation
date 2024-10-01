@@ -57,7 +57,7 @@ export default {
     },
     methods: {
         submitForm() {
-            this.$inertia.post('/login', this.form); // Adjust route if necessary
+            this.$inertia.post('/login', this.form);
         }
     }
 };

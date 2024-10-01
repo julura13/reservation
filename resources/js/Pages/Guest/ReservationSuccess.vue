@@ -9,7 +9,7 @@
                 <p class="text-orange-600 font-bold text-2xl">{{ reservation.reference_number }}</p>
             </div>
 
-            <!-- Display reservation details (label and value next to each other) -->
+            <!-- Display reservation details -->
             <div class="space-y-4">
                 <div class="flex justify-between">
                     <h2 class="text-xl font-semibold text-gray-800">Guest Name:</h2>
@@ -69,7 +69,7 @@ export default {
     },
     methods: {
         printDetails() {
-            window.print(); // Trigger browser print functionality
+            window.print();
         },
         goHome() {
             this.$inertia.visit('/'); // Redirect to home page

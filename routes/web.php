@@ -1,27 +1,9 @@
 <?php
 
 use App\Http\Controllers\AdminController;
-use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\GuestController;
-use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ReservationController;
-use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
-use Inertia\Inertia;
-
-//Route::get('/', function () {
-//    return redirect(route('guest.reservations'));
-//});
-
-Route::get('/dashboard', function () {
-    return Inertia::render('Dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
-
-Route::middleware('auth')->group(function () {
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-});
 
 require __DIR__.'/auth.php';
 
@@ -43,17 +25,13 @@ Route::get('/reservation/success/{reservation}', [ReservationController::class, 
 Route::post('/reservation/cancel/{reservation}', [ReservationController::class, 'cancelReservation'])->name('reservation.cancel');
 Route::post('/payment/cancel', [ReservationController::class, 'cancelPayment'])->name('payment.cancel');
 
-// Admin-facing routes (with middleware for admin users)
-//Route::middleware('auth')->prefix('admin')->group(function () {
-//    Route::get('/reservations', [AdminController::class, 'index'])->name('admin.reservations');
-//    Route::get('/reservations/{id}', [AdminController::class, 'showReservation'])->name('admin.reservations.show');
-//});
-
+// Admin facing routes
 Route::middleware('auth')->group(function () {
     Route::get('/admin', [AdminController::class, 'dashboard'])->name('admin.dashboard');
     Route::get('/admin/reservations', [AdminController::class, 'reservations'])->name('admin.reservations');
-    Route::get('/admin/upcoming-reservations', [AdminController::class, 'upcomingReservations'])->name('admin.upcoming');
     Route::post('/admin/reservations/{reservation}/mark-done', [AdminController::class, 'markAsDone']);
     Route::post('/admin/reservations/{reservation}/mark-checked-in', [AdminController::class, 'markAsCheckedIn']);
-
+    Route::get('/dashboard', function () {
+        return redirect('admin');
+    });
 });
