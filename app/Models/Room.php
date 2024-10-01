@@ -11,11 +11,8 @@ class Room extends Model
 
     protected $fillable = ['name', 'capacity', 'price_per_night'];
 
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
-     */
-    public function reservations(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
+    public function reservations()
     {
-        return $this->belongsToMany(Reservation::class);
+        return $this->hasMany(Reservation::class);
     }
 }

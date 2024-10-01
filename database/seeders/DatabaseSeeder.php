@@ -20,11 +20,11 @@ class DatabaseSeeder extends Seeder
 
         $rooms = Room::factory(10)->create();
 
-        Guest::factory(20)->create()->each(function ($guest) use ($rooms) {
-            Reservation::factory()->create([
-                'guest_id' => $guest->id,
-                'room_id' => $rooms->random()->id,
-            ]);
-        });
+//        Guest::factory(20)->create()->each(function ($guest) use ($rooms) {
+//            Reservation::factory()->create([
+//                'guest_id' => $guest->id,
+//                'room_id' => $rooms->random()->id,
+//            ]);
+//        });
     }
 }
