@@ -1,37 +1,38 @@
 <template>
-    <div class="min-h-screen flex">
-        <!-- Sidebar -->
-        <aside class="w-1/4 bg-teal-600 text-white p-6">
-            <h2 class="text-xl font-bold mb-4">Admin Dashboard</h2>
-            <nav>
-                <ul class="space-y-4">
+    <div class="min-h-screen flex flex-col">
+        <!-- Top Navigation Bar -->
+        <nav class="bg-teal-600 text-white p-4">
+            <div class="container mx-auto flex justify-between items-center">
+                <!-- Logo -->
+                <h2 class="md:text-xl text-base font-bold">Dashboard</h2>
+
+                <!-- Navigation Links -->
+                <ul class="flex md:space-x-6 space-x-4">
                     <li>
-                        <Link href="/admin/" class="hover:text-gray-300">Dashboard</Link>
+                        <Link href="/admin/" class="hover:text-gray-300"><font-awesome-icon :icon="['fas', 'house']" /></Link>
                     </li>
                     <li>
-                        <Link href="/admin/reservations" class="hover:text-gray-300">Reservations</Link>
+                        <Link href="/admin/reservations" class="hover:text-gray-300 text-sm md:text-base">Reservations</Link>
                     </li>
                 </ul>
-            </nav>
 
-            <!-- Logout Button -->
-            <form @submit.prevent="logout">
-                <button type="submit" class="hover:text-gray-300 mt-4">
-                    Logout
-                </button>
-            </form>
-        </aside>
+                <!-- Logout Button -->
+                <form @submit.prevent="logout" class="ml-6">
+                    <button type="submit" class="hover:text-gray-300"><font-awesome-icon :icon="['fas', 'power-off']" /></button>
+                </form>
+            </div>
+        </nav>
 
         <!-- Main Content -->
-        <main class="w-3/4 bg-gray-100 p-6">
+        <main class="flex-1 bg-gray-100 md:py-12 md:px-24 p-6">
             <slot></slot> <!-- This is where the page content will be displayed -->
         </main>
     </div>
 </template>
 
 <script>
-import {Link} from '@inertiajs/inertia-vue3';
-import {Inertia} from '@inertiajs/inertia'; // Correct import for Inertia's post method
+import { Link } from '@inertiajs/inertia-vue3';
+import { Inertia } from '@inertiajs/inertia'; // Correct import for Inertia's post method
 
 export default {
     components: {
