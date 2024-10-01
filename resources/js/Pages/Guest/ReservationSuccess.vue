@@ -39,6 +39,10 @@
                     <h2 class="text-xl font-semibold text-gray-800">Number of Rooms:</h2>
                     <p class="text-gray-600">{{ reservation.number_of_rooms }}</p>
                 </div>
+                <div class="flex justify-between">
+                    <h2 class="text-xl font-semibold text-gray-800">Number of Guests:</h2>
+                    <p class="text-gray-600">{{ reservation.number_of_guests }}</p>
+                </div>
             </div>
 
             <!-- Print button -->

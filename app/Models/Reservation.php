@@ -18,7 +18,8 @@ class Reservation extends Model
         'end_date',
         'number_of_rooms',
         'status',
-        'reference_number'
+        'reference_number',
+        'number_of_guests'
     ];
 
     protected $table = 'reservations';

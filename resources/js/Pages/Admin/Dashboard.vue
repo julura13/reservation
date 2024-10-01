@@ -1,6 +1,5 @@
 <template>
     <AdminDashboard>
-        <!-- Main Dashboard Heading -->
         <h1 class="text-3xl font-bold text-gray-800 mb-6">Admin Dashboard</h1>
 
         <!-- Summary Section (Total Reservations and Guests) -->
@@ -8,6 +7,10 @@
             <div class="p-4 bg-white shadow rounded-lg">
                 <h2 class="text-xl font-bold">Total Reservations</h2>
                 <p class="text-2xl">{{ totalReservations }}</p>
+            </div>
+            <div class="p-4 bg-white shadow rounded-lg">
+                <h2 class="text-xl font-bold">Total Rooms</h2>
+                <p class="text-2xl">{{ totalRooms }}</p>
             </div>
             <div class="p-4 bg-white shadow rounded-lg">
                 <h2 class="text-xl font-bold">Total Guests</h2>
@@ -22,9 +25,10 @@
                 <div v-for="reservation in reservations" :key="reservation.id" class="p-4 bg-white shadow rounded-lg">
                     <h3 class="font-bold">{{ reservation.guest.name }}</h3>
                     <p>Room: {{ reservation.room.name }}</p>
+                    <p>Total Guests: {{ reservation.number_of_guests }}</p>
                     <p>Check-in: {{ reservation.start_date }}</p>
                     <p>Check-out: {{ reservation.end_date }}</p>
-                    <p>Days Booked: {{ calculateDays(reservation.start_date, reservation.end_date) }}</p> <!-- New field for days booked -->
+                    <p>Days Booked: {{ calculateDays(reservation.start_date, reservation.end_date) }}</p>
                     <p>Status: {{ reservation.status }}</p>
                 </div>
             </div>
@@ -37,25 +41,28 @@
 
 <script>
 import AdminDashboard from '../../Layouts/AdminDashboard.vue';
-import { differenceInCalendarDays, parseISO } from 'date-fns'; // Import date-fns for date calculations
+import { differenceInCalendarDays, parseISO } from 'date-fns';
 
 export default {
     props: {
         reservations: {
             type: Array,
-            default: () => []  // Ensures a default value of an empty array
+            default: () => []
         },
         totalReservations: {
             type: Number,
-            default: 0  // Ensures a default value of 0
+            default: 0
         },
         totalGuests: {
             type: Number,
-            default: 0  // Ensures a default value of 0
+            default: 0
+        },
+        totalRooms: {
+            type: Number,
+            default: 0
         }
     },
     methods: {
-        // Method to calculate the number of days between check-in and check-out dates
         calculateDays(startDate, endDate) {
             const checkInDate = parseISO(startDate);
             const checkOutDate = parseISO(endDate);
