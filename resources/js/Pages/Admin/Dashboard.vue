@@ -1,9 +1,9 @@
 <template>
     <AdminDashboard>
-        <h1 class="text-3xl font-bold text-gray-800 mb-6">Admin Dashboard</h1>
+        <h2 class="text-2xl font-bold mb-4">Upcoming Completed Reservations (next 7 days)</h2>
 
         <!-- Summary Section (Total Reservations and Guests) -->
-        <div class="flex space-x-8 mb-6">
+        <div class="flex md:flex-row flex-col md:space-x-8 space-y-4 md:space-y-0 mb-6">
             <div class="p-4 bg-white shadow rounded-lg">
                 <h2 class="text-xl font-bold">Total Reservations</h2>
                 <p class="text-2xl">{{ totalReservations }}</p>
@@ -20,8 +20,7 @@
 
         <!-- Upcoming Completed Reservations Section -->
         <div>
-            <h2 class="text-2xl font-bold mb-4">Upcoming Completed Reservations</h2>
-            <div v-if="reservations && reservations.length > 0" class="grid grid-cols-3 gap-4">
+            <div v-if="reservations && reservations.length > 0" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
                 <div v-for="reservation in reservations" :key="reservation.id" class="p-4 bg-white shadow rounded-lg">
                     <h3 class="font-bold">{{ reservation.guest.name }}</h3>
                     <p>Room: {{ reservation.room.name }}</p>

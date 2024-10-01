@@ -4,13 +4,13 @@
         <h1 class="text-2xl font-bold mb-6">Manage Reservations</h1>
 
         <!-- Search and Filter Section -->
-        <div class="flex space-x-8 mb-4">
+        <div class="flex flex-col md:flex-row md:space-x-8 space-y-4 md:space-y-0 mb-4">
             <input
                 type="text"
                 v-model="search"
                 @input="applyFilters"
                 placeholder="Search reservations..."
-                class="p-2 border rounded-lg w-1/3"
+                class="p-2 border rounded-lg md:w-1/3 w-full"
             />
             <select v-model="selectedStatus" @change="applyFilters" class="p-2 border rounded-lg w-32">
                 <option value="">All</option>
@@ -23,50 +23,50 @@
         </div>
 
         <!-- Table of Reservations -->
-        <div v-if="sortedReservations.length > 0" class="overflow-x-auto">
-            <table class="min-w-full bg-white">
-                <thead>
-                <tr>
-                    <th class="px-4 py-2 border">Reference</th>
-                    <th class="px-4 py-2 border">Guest Name</th>
-                    <th class="px-4 py-2 border">Room</th>
-                    <th class="px-4 py-2 border">Check-in Date</th>
-                    <th class="px-4 py-2 border">Check-out Date</th>
-                    <th class="px-4 py-2 border">Days Till Arrival</th>
-                    <th class="px-4 py-2 border">Status</th>
-                    <th class="px-4 py-2 border">Action</th> <!-- Action column for "Mark as Done" and "Checked In" -->
-                </tr>
-                </thead>
-                <tbody>
-                <tr v-for="reservation in sortedReservations" :key="reservation.id" class="text-center">
-                    <td class="px-4 py-2 border">{{ reservation.reference_number }}</td>
-                    <td class="px-4 py-2 border">{{ reservation.guest.name }}</td>
-                    <td class="px-4 py-2 border">{{ reservation.room.name }}</td>
-                    <td class="px-4 py-2 border">{{ reservation.start_date }}</td>
-                    <td class="px-4 py-2 border">{{ reservation.end_date }}</td>
-                    <td class="px-4 py-2 border">{{ showDaysTillArrival(reservation) }}</td>
-                    <td class="px-4 py-2 border">{{ capitalizeStatus(reservation.status) }}</td>
-                    <td class="px-4 py-2 border">
-                        <!-- Mark as Done Button: Only show on check-out date -->
-                        <button v-if="isLastDay(reservation.end_date) && reservation.status !== 'done'"
-                                @click="markAsDone(reservation.id)"
-                                class="bg-orange-600 text-white px-4 py-1 rounded hover:bg-blue-700">
-                            Mark as Done
-                        </button>
+      <div v-if="sortedReservations.length > 0" class="overflow-x-auto">
+        <table class="min-w-full bg-white">
+          <thead>
+          <tr>
+            <th class="px-4 py-2 border">Reference</th>
+            <th class="px-4 py-2 border">Guest Name</th>
+            <th class="px-4 py-2 border">Room</th>
+            <th class="px-4 py-2 border">Check-in Date</th>
+            <th class="px-4 py-2 border">Check-out Date</th>
+            <th class="px-4 py-2 border">Days Till Arrival</th>
+            <th class="px-4 py-2 border">Status</th>
+            <th class="px-4 py-2 border">Action</th> <!-- Action column for "Mark as Done" and "Checked In" -->
+          </tr>
+          </thead>
+          <tbody>
+          <tr v-for="reservation in sortedReservations" :key="reservation.id" class="text-center">
+            <td class="px-4 py-2 border">{{ reservation.reference_number }}</td>
+            <td class="px-4 py-2 border">{{ reservation.guest.name }}</td>
+            <td class="px-4 py-2 border">{{ reservation.room.name }}</td>
+            <td class="px-4 py-2 border">{{ reservation.start_date }}</td>
+            <td class="px-4 py-2 border">{{ reservation.end_date }}</td>
+            <td class="px-4 py-2 border">{{ showDaysTillArrival(reservation) }}</td>
+            <td class="px-4 py-2 border">{{ capitalizeStatus(reservation.status) }}</td>
+            <td class="px-4 py-2 border">
+              <!-- Mark as Done and Checked In buttons -->
+              <button v-if="isLastDay(reservation.end_date) && reservation.status !== 'done'"
+                      @click="markAsDone(reservation.id)"
+                      class="bg-orange-600 text-white px-4 py-1 rounded hover:bg-blue-700">
+                Mark as Done
+              </button>
 
-                        <!-- Mark as Checked In Button: Only show on check-in date -->
-                        <button v-if="isCheckInDay(reservation.start_date) && reservation.status !== 'checked_in'"
-                                @click="markAsCheckedIn(reservation.id)"
-                                class="bg-green-600 text-white px-4 py-1 rounded hover:bg-green-700">
-                            Mark as Checked In
-                        </button>
-                    </td>
-                </tr>
-                </tbody>
-            </table>
-        </div>
+              <button v-if="isCheckInDay(reservation.start_date) && reservation.status !== 'checked_in'"
+                      @click="markAsCheckedIn(reservation.id)"
+                      class="bg-green-600 text-white px-4 py-1 rounded hover:bg-green-700">
+                Mark as Checked In
+              </button>
+            </td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
 
-        <!-- No Reservations Found -->
+
+      <!-- No Reservations Found -->
         <div v-else>
             <p>No reservations found.</p>
         </div>
@@ -112,7 +112,7 @@ export default {
         applyFilters() {
             this.filteredReservations = this.reservations.filter(reservation => {
                 const matchesSearch = reservation.guest.name.toLowerCase().includes(this.search.toLowerCase()) ||
-                    reservation.room.name.toLowerCase().includes(this.search.toLowerCase());
+                    reservation.room.name.toLowerCase().includes(this.search.toLowerCase()) || reservation.reference_number.toLowerCase().includes(this.search.toLowerCase());
                 const matchesStatus = this.selectedStatus === '' || reservation.status === this.selectedStatus;
 
                 return matchesSearch && matchesStatus;
