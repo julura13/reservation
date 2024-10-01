@@ -1,7 +1,7 @@
 <template>
     <div>
         <TopNavigation />
-        <div class="bg-cover bg-center min-h-[70vh]" style="background-image: url('/images/banner-no-overlay-min.png');">
+        <div class="bg-cover bg-center min-h-[70vh]" style="background-image: url('/images/banner-no-overlay-min.jpg');">
             <div class="flex items-center justify-center h-full">
                 <div class="bg-teal-600 shadow-lg rounded-lg p-8 max-w-lg w-full mx-4 my-12">
                     <h1 class="text-3xl font-bold text-center text-white mb-6">Book Your Stay</h1>

@@ -1,7 +1,7 @@
 <template>
     <div
         class="min-h-screen bg-cover bg-center flex justify-center items-center"
-        style="background-image: url('/images/login-background-min.png');"
+        style="background-image: url('/images/login-background-min.jpg');"
     >
         <div class="bg-white shadow-lg rounded-lg p-8 max-w-md w-full">
             <h1 class="text-3xl font-bold text-center text-teal-600 mb-6">Admin Login</h1>
