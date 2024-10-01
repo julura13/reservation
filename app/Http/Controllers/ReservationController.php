@@ -161,7 +161,7 @@ class ReservationController extends Controller
     }
 
     // Process the fake payment and update reservation status
-    public function processPayment(Request $request)
+    public function processPayment()
     {
         $reservationId = Session::get('reservation_id');
 
@@ -169,13 +169,14 @@ class ReservationController extends Controller
             return redirect()->route('home'); // Redirect if no reservation is found in the session
         }
 
-        // Mark the reservation as completed
+        // Mark the reservation as booked
         $reservation = Reservation::findOrFail($reservationId);
         $reservation->update(['status' => 'booked']);
 
         // Clear the session
         Session::forget('reservation_id');
 
+        // Send email to guest to confirm booking
         Mail::to($reservation->guest->email)->queue(new BookingConfirmed($reservation, $reservation->guest));
 
         // Redirect to the success page with the reservation details

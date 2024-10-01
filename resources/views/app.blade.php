@@ -22,7 +22,25 @@
         @vite(['resources/js/app.js', "resources/js/Pages/{$page['component']}.vue"])
         @inertiaHead
     </head>
-    <body class="font-sans antialiased">
+    <body class="font-sans antialiased relative">
+
+    @if(Session::has('message'))
+        <div class="absolute top-0 left-0 w-screen" id="toastBanner">
+            <div class="flex justify-between bg-orange-500">
+                <p class="flex bg-orange-500 justify-center text-white h-8 items-center font-bold w-full">{{ Session::get('message') }}</p>
+                <button class="w-8 text-white mr-12 font-bold hover:cursor-pointer hover:text-teal-200" id="closeBtn">x</button>
+            </div>
+
+        </div>
+    @endif
+
+
         @inertia
     </body>
+
+<script>
+    document.getElementById('closeBtn').addEventListener('click', function (){
+        document.getElementById('toastBanner').classList.add('hidden');
+    });
+</script>
 </html>
