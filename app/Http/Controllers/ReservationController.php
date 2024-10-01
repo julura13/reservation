@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\BookingConfirmed;
 use App\Models\Guest;
 use App\Models\Reservation;
 use App\Models\Room;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Session;
 use Carbon\Carbon;
 use Illuminate\Support\Str;
@@ -122,8 +124,6 @@ class ReservationController extends Controller
         $randomString = strtoupper(Str::random(5)); // Generate 5 random characters
         $referenceNumber = $checkinDate . $randomString; // Combine both to form the reference number
 
-//        dd($referenceNumber);
-
         // Create the reservation with the guest linked
         $reservation = Reservation::create([
             'guest_id' => $guest->id,
@@ -175,6 +175,8 @@ class ReservationController extends Controller
 
         // Clear the session
         Session::forget('reservation_id');
+
+        Mail::to($reservation->guest->email)->queue(new BookingConfirmed($reservation, $reservation->guest));
 
         // Redirect to the success page with the reservation details
         return redirect()->route('reservation.success', ['reservation' => $reservationId]);
