@@ -105,7 +105,10 @@ export default {
     },
     methods: {
         submitForm() {
-            this.$inertia.post(this.route('reservation.confirm'), this.form);
+            this.$inertia.post(this.route('reservation.confirm'), {
+                ...this.form,
+                guest_count: this.guest_count
+            });
         },
         cancelReservation() {
             if (confirm('Are you sure you want to cancel your reservation?')) {

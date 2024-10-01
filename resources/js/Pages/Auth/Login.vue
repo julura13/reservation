@@ -26,12 +26,20 @@
                         required
                     />
                 </div>
-                <button
-                    type="submit"
-                    class="w-full bg-teal-600 text-white font-bold py-2 px-4 rounded-lg hover:bg-teal-700 transition-colors"
-                >
-                    Log In
-                </button>
+                <div class="flex flex-col space-y-4">
+                    <button
+                        type="submit"
+                        class="w-full bg-teal-600 text-white font-bold py-2 px-4 rounded-lg hover:bg-teal-700 transition-colors"
+                    >
+                        Log In
+                    </button>
+
+                    <a href="/"
+                       class="flex justify-center w-full bg-orange-600 text-white font-bold py-2 px-4
+                            rounded-lg hover:bg-orange-700 transition-colors mt-4">
+                        Cancel
+                    </a>
+                </div>
             </form>
         </div>
     </div>
