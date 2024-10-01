@@ -13,7 +13,8 @@ class AdminController extends Controller
         $today = Carbon::today();
         $nextWeek = Carbon::today()->addDays(7);
 
-        $completedReservations = Reservation::where('status', 'completed')
+        // Fetch completed reservations in the upcoming week
+        $completedReservations = Reservation::where('status', 'booked')
             ->whereBetween('start_date', [$today, $nextWeek])
             ->with('guest', 'room')
             ->get();

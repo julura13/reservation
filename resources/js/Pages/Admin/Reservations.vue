@@ -14,7 +14,7 @@
             />
             <select v-model="selectedStatus" @change="applyFilters" class="p-2 border rounded-lg w-32">
                 <option value="">All</option>
-                <option value="completed">Completed</option>
+                <option value="booked">Booked</option>
                 <option value="pending">Pending</option>
                 <option value="checked_in">Checked In</option> <!-- New status -->
                 <option value="canceled">Canceled</option>
@@ -88,7 +88,7 @@ export default {
     data() {
         return {
             search: '', // The search term input
-            selectedStatus: 'completed', // Default to "completed"
+            selectedStatus: 'booked', // Default to "completed"
             filteredReservations: [] // Store filtered reservations
         };
     },
@@ -119,7 +119,7 @@ export default {
             });
         },
         showDaysTillArrival(reservation) {
-            if (reservation.status !== 'completed') {
+            if (reservation.status !== 'booked') {
                 return ''; // Blank if the status is not "completed"
             }
 

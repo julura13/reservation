@@ -171,7 +171,7 @@ class ReservationController extends Controller
 
         // Mark the reservation as completed
         $reservation = Reservation::findOrFail($reservationId);
-        $reservation->update(['status' => 'completed']);
+        $reservation->update(['status' => 'booked']);
 
         // Clear the session
         Session::forget('reservation_id');
